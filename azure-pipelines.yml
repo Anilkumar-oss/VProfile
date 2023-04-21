@@ -1,15 +1,15 @@
- trigger:
+trigger:
     branches:
        include:
          - main
 
- pool:
+pool:
    vmImage: 'ubuntu-latest'
 
- variables:
+variables:
    - group: 'variable-group-name' //defined in particular area to reuse to all release piplines
 
- steps:
+steps:
    - task: MavenAuthenticate@0
      displayName: 'Maven authenticate'
      inputs:
