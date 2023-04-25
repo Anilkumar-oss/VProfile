@@ -6,15 +6,8 @@ trigger:
 pool:
    vmImage: 'ubuntu-latest'
 
-variables:
-   - group: 'variable-group-name' //defined in particular area to reuse to all release piplines
 
 steps:
-   - task: MavenAuthenticate@0
-     displayName: 'Maven authenticate'
-     inputs:
-        mavenAuthenticateFeed: 'your-maven-feed-name'
-  
    - task: Maven@3
      displayName: 'Maven build'
      inputs:
