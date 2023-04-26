@@ -23,5 +23,12 @@ steps:
    - task: DockerInstaller@0
      inputs:
        dockerVersion: '17.09.0-ce'
+   - task: Docker@2
+     displayName: 'Build Docker image'
+     inputs:
+      command: build
+      dockerfile: 'path/to/Dockerfile'
+      imageName: 'my-docker-image:$(Build.ArtifactStagingDirectory)'
+      includeLatestTag: true 
    
    
