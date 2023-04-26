@@ -8,13 +8,17 @@ pool:
 
 
 steps:
-   - task: Maven@3
-     displayName: 'Maven build'
+   - task: Maven@4
      inputs:
-        mavenPomFile: 'pom.xml'
-        goals: 'package'
-        options: '-DskipTests=true'
-        publishJUnitResults: false
+       mavenPomFile: 'pom.xml'
+       publishJUnitResults: true
+       testResultsFiles: '**/surefire-reports/TEST-*.xml'
+       javaHomeOption: 'JDKVersion'
+       mavenVersionOption: 'Default'
+       mavenAuthenticateFeed: false
+       effectivePomSkip: false
+       sonarQubeRunAnalysis: false
+   
    - task: PublishBuildArtifacts@1
      inputs:
        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
@@ -25,12 +29,5 @@ steps:
        SourceFolder: 'https://github.com/anilkumarpuli/VProfile/blob/master/Dockerfile'
        Contents: 'Dockerfile'
        TargetFolder: '.'
-   - task: Docker@2
-     displayName: 'Build Docker image'
-     inputs:
-      command: build
-      dockerfile: '.'
-      imageName: 'mydockerfile:$(Build.BUILD_NUMBER)'
-      includeLatestTag: true 
-   
+  
    
