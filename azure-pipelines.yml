@@ -20,15 +20,17 @@ steps:
        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
        ArtifactName: 'drop'
        publishLocation: 'Container'
-   - task: DockerInstaller@0
+   - task: CopyFiles@2
      inputs:
-       dockerVersion: '17.09.0-ce'
+       SourceFolder: 'https://github.com/anilkumarpuli/VProfile/blob/master/Dockerfile'
+       Contents: 'Dockerfile'
+       TargetFolder: '.'
    - task: Docker@2
      displayName: 'Build Docker image'
      inputs:
       command: build
-      dockerfile: 'VProfile/Dockerfile'
-      imageName: 'my-docker-image:$(Build.BuilId)'
+      dockerfile: '.'
+      imageName: 'mydockerfile:$(Build.BUILD_NUMBER)'
       includeLatestTag: true 
    
    
