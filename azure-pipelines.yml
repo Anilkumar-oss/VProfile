@@ -2,37 +2,34 @@ trigger:
     branches:
        include:
          - main
-
 pool:
    vmImage: 'ubuntu-latest'
-
-
 steps:
-   - task: Maven@4
-     inputs:
-       mavenPomFile: 'pom.xml'
-       publishJUnitResults: true
-       testResultsFiles: '**/surefire-reports/TEST-*.xml'
-       javaHomeOption: 'JDKVersion'
-       mavenVersionOption: 'Default'
-       mavenAuthenticateFeed: false
-       effectivePomSkip: false
-       sonarQubeRunAnalysis: false
-   
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
+    
   #  - task: PublishBuildArtifacts@1
   #    inputs:
   #      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
   #      ArtifactName: 'drop'
   #      publishLocation: 'Container'
-   - task: PublishPipelineArtifact@1
-     inputs:
-      targetPath: '$(Pipeline.Workspace)'
-      artifact: 'vprofile'
-      publishLocation: 'pipeline'
-   - task: CopyFiles@2
-     inputs:
-      SourceFolder: 'https://github.com/anilkumarpuli/VProfile/blob/master/Dockerfile'
-      Contents: 'Dockerfile'
-      TargetFolder: '.'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'vprofile'
+        publishLocation: 'pipeline'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: 'https://github.com/anilkumarpuli/VProfile/blob/master/Dockerfile'
+        Contents: 'Dockerfile'
+        TargetFolder: '.'
   
    
