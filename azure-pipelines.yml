@@ -19,15 +19,20 @@ steps:
        effectivePomSkip: false
        sonarQubeRunAnalysis: false
    
-   - task: PublishBuildArtifacts@1
+  #  - task: PublishBuildArtifacts@1
+  #    inputs:
+  #      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  #      ArtifactName: 'drop'
+  #      publishLocation: 'Container'
+   - task: PublishPipelineArtifact@1
      inputs:
-       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-       ArtifactName: 'drop'
-       publishLocation: 'Container'
+      targetPath: '$(Pipeline.Workspace)'
+      artifact: 'vprofile'
+      publishLocation: 'pipeline'
    - task: CopyFiles@2
      inputs:
-       SourceFolder: 'https://github.com/anilkumarpuli/VProfile/blob/master/Dockerfile'
-       Contents: 'Dockerfile'
-       TargetFolder: '.'
+      SourceFolder: 'https://github.com/anilkumarpuli/VProfile/blob/master/Dockerfile'
+      Contents: 'Dockerfile'
+      TargetFolder: '.'
   
    
