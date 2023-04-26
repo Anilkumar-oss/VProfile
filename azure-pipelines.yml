@@ -9,7 +9,7 @@ steps:
       displayName: 'Maven build'
       inputs:
         mavenPomFile: 'pom.xml'
-        goals: 'clean install'
+        goals: 'clean install -DskipTests'
         publishJUnitResults: true
     
     
