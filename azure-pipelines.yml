@@ -5,6 +5,14 @@ trigger:
 pool:
    vmImage: 'ubuntu-latest'
 steps:
+
+    - task: JavaToolInstaller@0
+      displayName: java installer
+      inputs:
+        versionSpec: '8'
+        jdkArchitectureOption: 'x64'
+        cleanDestinationDirectory: false
+    
     - task: Maven@3
       displayName: 'Maven build'
       inputs:
@@ -12,7 +20,7 @@ steps:
         goals: 'clean install'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        
+    
     
   #  - task: PublishBuildArtifacts@1
   #    inputs:
