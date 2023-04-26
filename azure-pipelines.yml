@@ -27,8 +27,8 @@ steps:
      displayName: 'Build Docker image'
      inputs:
       command: build
-      dockerfile: 'path/to/Dockerfile'
-      imageName: 'my-docker-image:$(Build.ArtifactStagingDirectory)'
+      dockerfile: 'VProfile/Dockerfile'
+      imageName: 'my-docker-image:$(Build.BuilId)'
       includeLatestTag: true 
    
    
